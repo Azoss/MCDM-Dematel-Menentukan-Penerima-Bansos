@@ -24,32 +24,50 @@ DEMATEL adalah metode yang digunakan untuk menganalisis dan memecahkan masalah k
 
 ### Penjelasan Kode
 
-#### Menghitung Matriks Hubungan Langsung
+#### 1. Menghitung Matriks Hubungan Langsung
 
-   
-    def calculate_direct_relation_matrix(df):
-    n = len(df.columns)
-    direct_relation_matrix = np.zeros((n, n))
-    
-    for i in range(n):
-        for j in range(n):
-            if i != j:
-                direct_relation_matrix[i, j] = np.mean(df.iloc[:, i]) - np.mean(df.iloc[:, j])
-    return direct_relation_matrix
+Matriks Hubungan Langsung: Ini adalah langkah pertama dalam analisis DEMATEL. Matriks ini menunjukkan pengaruh langsung antara kriteria yang diidentifikasi.
+Misalnya, jika kita memiliki kriteria Pendapatan (X1), Jumlah Tanggungan (X2), dan Pengeluaran (X3), maka matriks hubungan langsung bisa terlihat seperti ini:
 
-Fungsi ini menghitung matriks hubungan langsung (direct_relation_matrix) berdasarkan perbedaan rata-rata nilai antara setiap pasangan kriteria. Matriks ini digunakan untuk memahami seberapa besar satu kriteria mempengaruhi kriteria lainnya secara langsung.
+     
+    | X1 (Pendapatan) | X2 (Jumlah Tanggungan) | X3 (Pengeluaran)           |
+    -------------------------------------------------------------------
+    X1    |       0         |      Hubungan X1 -> X2 |   Hubungan X1 -> X3  |
+    -------------------------------------------------------------------
+    X2    |  Hubungan X2 -> X1 |        0              |   Hubungan X2 -> X3|
+    -------------------------------------------------------------------
+    X3    |  Hubungan X3 -> X1 |  Hubungan X3 -> X2    |        0           |
+    -------------------------------------------------------------------
 
-#### Normalisasi Matriks Hubungan Langsung
+Di sini, "Hubungan X1 -> X2" menunjukkan pengaruh Pendapatan terhadap Jumlah Tanggungan, dan seterusnya.
 
-     def normalize_matrix(matrix):
-    return matrix / np.max(matrix)
 
-Fungsi ini menormalkan matriks hubungan langsung agar nilai-nilainya berada dalam rentang yang seragam, sehingga analisis lebih konsisten dan mudah dibandingkan.
+#### 2. Normalisasi Matriks Hubungan Langsung
+
+Normalisasi: Setelah matriks hubungan langsung dibentuk, nilai-nilainya dinormalkan untuk menghasilkan matriks yang memiliki rentang nilai yang seragam (biasanya dari 0 hingga 1 atau -1 hingga 1). Ini mempermudah perbandingan antara kriteria yang berbeda.
+
+    | X1 (Pendapatan) | X2 (Jumlah Tanggungan) | X3 (Pengeluaran)     |
+     -------------------------------------------------------------------
+     X1               |       0                | Nilai Norm X1 -> X2  |   Nilai Norm X1 -> X3 |
+     -------------------------------------------------------------------
+     X2               |  Nilai Norm X2 -> X1   |        0             |   Nilai Norm X2 -> X3 |
+     -------------------------------------------------------------------
+     X3               |  Nilai Norm X3 -> X1   |  Nilai Norm X3 -> X2 |        0              |
+     -------------------------------------------------------------------
+     
 
 #### Menghitung Matriks Hubungan Total
 
-    def calculate_total_relation_matrix(normalized_matrix):
-    identity_matrix = np.eye(len(normalized_matrix))
-    return np.linalg.inv(identity_matrix - normalized_matrix).dot(normalized_matrix)
+Matriks Hubungan Total: Setelah normalisasi, matriks hubungan total dibentuk. Ini mencakup pengaruh langsung dan tidak langsung antara kriteria.
 
-Fungsi ini menghitung matriks hubungan total (total_relation_matrix), yang mencakup hubungan langsung dan tidak langsung antara kriteria. Matriks ini diperoleh dengan menggunakan invers dari matriks identitas dikurangi matriks hubungan langsung yang dinormalisasi.
+          | X1 (Pendapatan) | X2 (Jumlah Tanggungan) | X3 (Pengeluaran)       | 
+            -------------------------------------------------------------------
+            X1              |       1                | Total Hubungan X1      |   Total Hubungan X1 |
+            -------------------------------------------------------------------
+            X2              |  Total Hubungan X2     |          1             |   Total Hubungan X2 |
+            -------------------------------------------------------------------
+            X3              |  Total Hubungan X3     |  Total Hubungan X3     |        1            |
+            -------------------------------------------------------------------
+
+
+Matriks ini menunjukkan pengaruh total (langsung dan tidak langsung) dari setiap kriteria terhadap yang lain.
