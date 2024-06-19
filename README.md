@@ -60,14 +60,14 @@ Normalisasi: Setelah matriks hubungan langsung dibentuk, nilai-nilainya dinormal
 
 Matriks Hubungan Total: Setelah normalisasi, matriks hubungan total dibentuk. Ini mencakup pengaruh langsung dan tidak langsung antara kriteria.
 
-          | X1 (Pendapatan) | X2 (Jumlah Tanggungan) | X3 (Pengeluaran)       | 
-            -------------------------------------------------------------------
-            X1              |       1                | Total Hubungan X1      |   Total Hubungan X1 |
-            -------------------------------------------------------------------
-            X2              |  Total Hubungan X2     |          1             |   Total Hubungan X2 |
-            -------------------------------------------------------------------
-            X3              |  Total Hubungan X3     |  Total Hubungan X3     |        1            |
-            -------------------------------------------------------------------
+    | X1 (Pendapatan) | X2 (Jumlah Tanggungan) | X3 (Pengeluaran)       | 
+      -------------------------------------------------------------------
+      X1              |       1                | Total Hubungan X1      |   Total Hubungan X1 |
+      -------------------------------------------------------------------
+      X2              |  Total Hubungan X2     |          1             |   Total Hubungan X2 |
+      -------------------------------------------------------------------
+      X3              |  Total Hubungan X3     |  Total Hubungan X3     |        1            |
+      -------------------------------------------------------------------
 
 
 Matriks ini menunjukkan pengaruh total (langsung dan tidak langsung) dari setiap kriteria terhadap yang lain.
