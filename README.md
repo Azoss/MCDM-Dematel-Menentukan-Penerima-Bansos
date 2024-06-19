@@ -56,7 +56,7 @@ Normalisasi: Setelah matriks hubungan langsung dibentuk, nilai-nilainya dinormal
      -------------------------------------------------------------------
      
 
-#### Menghitung Matriks Hubungan Total
+#### 3. Menghitung Matriks Hubungan Total
 
 Matriks Hubungan Total: Setelah normalisasi, matriks hubungan total dibentuk. Ini mencakup pengaruh langsung dan tidak langsung antara kriteria.
 
